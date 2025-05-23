@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmirMohammad's Gaming & Web Design Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Exo+2:wght@300;400&family=Fira+Code&display=swap">
+    <style>
+        :root {
+            --dark-void: #121212;
+            --neon-cyborg: #00F5FF;
+            --electric-purple: #A020F0;
+            --razer-red: #FF4655;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--dark-void);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .neon-btn {
+            position: relative;
+            background: transparent;
+            color: var(--neon-cyborg);
+            border: 2px solid var(--neon-cyborg);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .neon-btn:hover {
+            box-shadow: 0 0 10px var(--neon-cyborg), 0 0 20px var(--neon-cyborg);
+            text-shadow: 0 0 5px var(--neon-cyborg);
+        }
+        
+        .neon-btn:active {
+            transform: translateY(2px);
+        }
+        
+        .neon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .neon-btn:hover::before {
+            left: 100%;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 245, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 245, 255, 0);
+            }
+        }
+        
+        .circuit-divider {
+            position: relative;
+            height: 30px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 L20,5 L30,0 L40,5 L60,5 L70,10 L80,5 L100,5" fill="none" stroke="%2300F5FF" stroke-width="0.5"/></svg>');
+            background-size: 100% 100%;
+            margin: 40px 0;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--neon-cyborg);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 2px;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--neon-cyborg) }
+        }
+        
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch:hover::before, .glitch:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch:hover::before {
+            color: var(--electric-purple);
+            animation: glitch-effect 3s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+        
+        .glitch:hover::after {
+            color: var(--razer-red);
+            animation: glitch-effect 2s infinite reverse;
+            clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+        }
+        
+        @keyframes glitch-effect {
+            0% { transform: translate(0) }
+            20% { transform: translate(-3px, 3px) }
+            40% { transform: translate(-3px, -3px) }
+            60% { transform: translate(3px, 3px) }
+            80% { transform: translate(3px, -3px) }
+            100% { transform: translate(0) }
+        }
+        
+        .hp-bar {
+            height: 5px;
+            background: linear-gradient(90deg, var(--razer-red), var(--electric-purple), var(--neon-cyborg));
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hp-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 2s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) }
+            100% { transform: translateX(100%) }
+        }
+        
+        .game-card:hover .game-thumbnail {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
+        
+        .pixel-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border: 2px solid;
+            image-rendering: pixelated;
+            position: relative;
+        }
+        
+        .pixel-tag::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid;
+            z-index: -1;
+        }
+        
+        .vote-btn:hover {
+            transform: scale(1.2);
+        }
+        
+        .vote-btn:active {
+            transform: scale(0.9);
+        }
+        
+        .project-card {
+            perspective: 1000px;
+        }
+        
+        .project-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .project-card:hover .project-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .project-card-front, .project-card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .project-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .pixel-avatar {
+            image-rendering: pixelated;
+            border: 3px solid var(--neon-cyborg);
+        }
+        
+        .achievement-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-badge:hover {
+            transform: translateY(-5px) rotate(5deg);
+            filter: drop-shadow(0 5px 5px rgba(0, 245, 255, 0.5));
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black bg-opacity-80 backdrop-blur-md fixed w-full z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-xl font-bold text-neon-cyborg" style="color: var(--neon-cyborg);">AMIR'S HUB</span>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#home" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:text-neon-cyborg transition">Home</a>
+                            <a href="#gaming" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-neon-cyborg transition">Gaming</a>
+                            <a href="#portfolio" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-neon-cyborg transition">Portfolio</a>
+                            <a href="#map" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-neon-cyborg transition">Game Dev Map</a>
+                            <a href="#community" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-neon-cyborg transition">Community</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <div class="w-32 mr-4">
+                            <div class="text-xs mb-1 text-neon-cyborg text-right">ENGAGEMENT LEVEL</div>
+                            <div class="hp-bar"></div>
+                        </div>
+                        <button class="neon-btn px-4 py-2 rounded-md text-sm font-medium">
+                            Login
+                        </button>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-800">Home</a>
+                <a href="#gaming" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800">Gaming</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800">Portfolio</a>
+                <a href="#map" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800">Game Dev Map</a>
+                <a href="#community" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800">Community</a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-700">
+                <div class="flex items-center px-5">
+                    <div class="w-full">
+                        <div class="text-xs mb-1 text-neon-cyborg">ENGAGEMENT LEVEL</div>
+                        <div class="hp-bar"></div>
+                    </div>
+                </div>
+                <div class="mt-3 px-2 space-y-1">
+                    <button class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 neon-btn">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center bg-black overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-0 w-32 h-32 rounded-full bg-electric-purple opacity-20 blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-neon-cyborg opacity-20 blur-3xl"></div>
+            <div class="absolute top-1/3 right-1/4 w-48 h-48 rounded-full bg-razer-red opacity-20 blur-3xl"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 typewriter" style="color: var(--neon-cyborg);">
+                CODE LIKE A PRO, GAME LIKE A LEGEND
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-300 mb-8">
+                Welcome to my digital playground where web design meets gaming culture. Explore my portfolio, discover the latest gaming news, and join our vibrant community.
+            </p>
+            <button class="neon-btn pulse px-8 py-4 rounded-md text-lg font-medium">
+                EXPLORE MY GAMING UNIVERSE
+            </button>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+            <a href="#gaming" class="text-neon-cyborg animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Gaming News Hub -->
+    <section id="gaming" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 glitch" data-text="GAMING NEWS HUB" style="color: var(--neon-cyborg);">
+                    GAMING NEWS HUB
+                </h2>
+                <p class="text-gray-400 max-w-3xl mx-auto">
+                    Stay updated with the latest in the gaming world. News, reviews, and insider info from your favorite titles.
+                </p>
+            </div>
+            
+            <div class="circuit-divider"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Game Card 1 -->
+                <div class="game-card bg-gray-800 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg">
+                    <div class="relative overflow-hidden">
+                        <div class="game-thumbnail h-48 bg-cover bg-center transition-transform duration-300" style="background-image: url('https://images.unsplash.com/photo-1598550476439-6847785fcea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="absolute top-2 left-2 flex space-x-2">
+                            <span class="pixel-tag" style="color: var(--electric-purple); border-color: var(--electric-purple);">RPG</span>
+                            <span class="pixel-tag" style="color: var(--razer-red); border-color: var(--razer-red);">NEW</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Elden Ring Expansion Announced</h3>
+                        <p class="text-gray-400 mb-4">FromSoftware reveals Shadow of the Erdtree, a massive new DLC coming early 2024.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">June 15, 2023</span>
+                            <div class="flex space-x-2">
+                                <button class="vote-btn text-green-500 transition-transform" onclick="vote(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                    </svg>
+                                </button>
+                                <span class="text-gray-300">142</span>
+                                <button class="vote-btn text-red-500 transition-transform" onclick="vote(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Game Card 2 -->
+                <div class="game-card bg-gray-800 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg">
+                    <div class="relative overflow-hidden">
+                        <div class="game-thumbnail h-48 bg-cover bg-center transition-transform duration-300" style="background-image: url('https://images.unsplash.com/photo-1542751375-ad40-773baa60a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="absolute top-2 left-2 flex space-x-2">
+                            <span class="pixel-tag" style="color: var(--electric-purple); border-color: var(--electric-purple);">FPS</span>
+                            <span class="pixel-tag" style="color: var(--neon-cyborg); border-color: var(--neon-cyborg);">ESPORT</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Counter-Strike 2 Officially Released</h3>
+                        <p class="text-gray-400 mb-4">Valve's long-awaited sequel brings major engine upgrades and gameplay refinements.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">June 10, 2023</span>
+                            <div class="flex space-x-2">
+                                <button class="vote-btn text-green-500 transition-transform" onclick="vote(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                    </svg>
+                                </button>
+                                <span class="text-gray-300">89</span>
+                                <button class="vote-btn text-red-500 transition-transform" onclick="vote(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Game Card 3 -->
+                <div class="game-card bg-gray-800 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg">
+                    <div class="relative overflow-hidden">
+                        <div class="game-thumbnail h-48 bg-cover bg-center transition-transform duration-300" style="background-image: url('https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="absolute top-2 left-2 flex space-x-2">
+                            <span class="pixel-tag" style="color: var(--razer-red); border-color: var(--razer-red);">ACTION</span>
+                            <span class="pixel-tag" style="color: var(--neon-cyborg); border-color: var(--neon-cyborg);">UPDATE</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Cyberpunk 2077: Phantom Liberty</h3>
+                        <p class="text-gray-400 mb-4">CD Projekt Red's redemption arc continues with this massive story expansion.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">June 5, 2023</span>
+                            <div class="flex space-x-2">
+                                <button class="vote-btn text-green-500 transition-transform" onclick="vote(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                    </svg>
+                                </button>
+                                <span class="text-gray-300">76</span>
+                                <button class="vote-btn text-red-500 transition-transform" onclick="vote(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="neon-btn px-6 py-3 rounded-md text-lg font-medium">
+                    VIEW ALL NEWS
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Web Design Portfolio -->
+    <section id="portfolio" class="py-20 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 glitch" data-text="WEB DESIGN PORTFOLIO" style="color: var(--neon-cyborg);">
+                    WEB DESIGN PORTFOLIO
+                </h2>
+                <p class="text-gray-400 max-w-3xl mx-auto">
+                    Where creativity meets functionality. Explore my latest web design projects and case studies.
+                </p>
+            </div>
+            
+            <div class="circuit-divider"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card h-96">
+                    <div class="project-card-inner h-full w-full relative">
+                        <div class="project-card-front h-full bg-gray-800 rounded-lg p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="w-full h-40 bg-gradient-to-r from-electric-purple to-neon-cyborg rounded mb-4"></div>
+                                <h3 class="text-xl font-bold mb-2">Nexus Gaming Platform</h3>
+                                <p class="text-gray-400">A modern gaming community platform with real-time features.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-2 py-1 bg-gray-700 rounded">React</span>
+                                <span class="text-xs px-2 py-1 bg-gray-700 rounded">Node.js</span>
+                                <span class="text-xs px-2 py-1 bg-gray-700 rounded">WebSockets</span>
+                            </div>
+                        </div>
+                        <div class="project-card-back h-full bg-gray-800 rounded-lg p-6 flex flex-col justify-center items-center">
+                            <h3 class="text-xl font-bold mb-4 text-center">Nexus Gaming Platform</h3>
+                            <p class="text-gray-400 text-center mb-6">Created a full-stack gaming community platform with real-time chat, game tracking, and social features.</p>
+                            <button class="neon-btn px-4 py-2 rounded-md text-sm font-medium mb-2">
+                                VIEW CASE STUDY
+                            </button>
+                            <button class="text-neon-cyborg text-sm font-medium">
+                                LIVE DEMO
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card h-96">
+                    <div class="project-card-inner h-full w-full relative">
+                        <div class="project-card-front h-full bg-gray-800 rounded-lg p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="w-full h-40 bg-gradient-to-r from-razer-red to-electric-purple rounded mb-4"></div>
+                                <h3 class="text-xl font-bold mb-2">CyberShop E-Commerce</h3>
+                                <p class="text-gray-400">Futuristic e-commerce platform for gaming peripherals.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-2 py-1 bg-gray-700 rounded">Vue.js</span>
+                                <span class="text-xs px-2 py-1 bg-gray-700 rounded">Laravel</span>
+                                <span class="text-xs px-2 py-1 bg-gray-700 rounded">Stripe</span>
+                            </div>
+                        </div>
+                        <div class="project-card-back h-full bg-gray-800 rounded-lg p-6 flex flex-col justify-center items-center">
+                            <h3 class="text-xl font-bold mb-4 text-center">CyberShop E-Commerce</h3>
+                            <p class="text-gray-400 text-center mb-6">Developed a high-performance e-commerce solution with 3D product previews and AR try-on features.</p>
+                            <button class="neon-btn px-4 py-2 rounded-md text-sm font-medium mb-2">
+                                VIEW CASE STUDY
+                            </button>
+                            <button class="text-neon-cyborg text-sm font-medium">
+                                LIVE DEMO
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card h-96">
+                    <div class="project-card-inner h-full w-full relative">
+                        <div class="project-card-front h-full bg-gray-800 rounded-lg p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="w-full h-40 bg-gradient-to-r from-neon-cyborg to-razer-red rounded mb-4"></div>
+                                <h3 class="text-xl font-bold mb-2">Retro Game Archive</h3>
+                                <p class="text-gray-400">Interactive museum of classic video games.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-2 py-1 bg-gray-700 rounded">Three.js</span>
+                                <span class="text-xs px-2 py-1 bg-gray-700 rounded">GSAP</span>
+                                <span class="text-xs px-2 py-1 bg-gray-700 rounded">WebGL</span>
+                            </div>
+                        </div>
+                        <div class="project-card-back h-full bg-gray-800 rounded-lg p-6 flex flex-col justify-center items-center">
+                            <h3 class="text-xl font-bold mb-4 text-center">Retro Game Archive</h3>
+                            <p class="text-gray-400 text-center mb-6">Built an immersive 3D experience showcasing the history of video games with playable emulators.</p>
+                            <button class="neon-btn px-4 py-2 rounded-md text-sm font-medium mb-2">
+                                VIEW CASE STUDY
+                            </button>
+                            <button class="text-neon-cyborg text-sm font-medium">
+                                LIVE DEMO
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="neon-btn px-6 py-3 rounded-md text-lg font-medium">
+                    VIEW FULL PORTFOLIO
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Gaming Map -->
+    <section id="map" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 glitch" data-text="GAME DEV WORLD MAP" style="color: var(--neon-cyborg);">
+                    GAME DEV WORLD MAP
+                </h2>
+                <p class="text-gray-400 max-w-3xl mx-auto">
+                    Explore the global landscape of game development studios and their iconic creations.
+                </p>
+            </div>
+            
+            <div class="circuit-divider"></div>
+            
+            <div class="relative bg-gray-800 rounded-lg overflow-hidden h-96">
+                <div id="map-container" class="h-full w-full bg-gray-700 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" class="w-full h-full">
+                        <!-- Simplified world map SVG would go here -->
+                        <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1200px-World_map_-_low_resolution.svg.png" width="1000" height="600" opacity="0.3"/>
+                        
+                        <!-- Game studio locations -->
+                        <g class="cursor-pointer hover:opacity-80 transition-opacity" onclick="showStudioInfo('cd-projekt-red')">
+                            <circle cx="550" cy="250" r="8" fill="var(--electric-purple)" stroke="white" stroke-width="2"/>
+                            <text x="550" y="270" text-anchor="middle" fill="white" font-size="12">CD Projekt Red</text>
+                        </g>
+                        
+                        <g class="cursor-pointer hover:opacity-80 transition-opacity" onclick="showStudioInfo('fromsoftware')">
+                            <circle cx="850" cy="280" r="8" fill="var(--razer-red)" stroke="white" stroke-width="2"/>
+                            <text x="850" y="300" text-anchor="middle" fill="white" font-size="12">FromSoftware</text>
+                        </g>
+                        
+                        <g class="cursor-pointer hover:opacity-80 transition-opacity" onclick="showStudioInfo('valve')">
+                            <circle cx="200" cy="220" r="8" fill="var(--neon-cyborg)" stroke="white" stroke-width="2"/>
+                            <text x="200" y="240" text-anchor="middle" fill="white" font-size="12">Valve</text>
+                        </g>
+                        
+                        <g class="cursor-pointer hover:opacity-80 transition-opacity" onclick="showStudioInfo('ubisoft')">
+                            <circle cx="450" cy="230" r="8" fill="var(--electric-purple)" stroke="white" stroke-width="2"/>
+                            <text x="450" y="250" text-anchor="middle" fill="white" font-size="12">Ubisoft</text>
+                        </g>
+                        
+                        <g class="cursor-pointer hover:opacity-80 transition-opacity" onclick="showStudioInfo('rockstar')">
+                            <circle cx="250" cy="240" r="8" fill="var(--razer-red)" stroke="white" stroke-width="2"/>
+                            <text x="250" y="260" text-anchor="middle" fill="white" font-size="12">Rockstar</text>
+                        </g>
+                        
+                        <!-- Animated plane -->
+                        <path id="plane-path" d="M200,220 L300,180 L400,200 L550,250 L850,280" stroke="transparent" fill="none"/>
+                        <g>
+                            <animateMotion xlink:href="#plane" dur="10s" repeatCount="indefinite">
+                                <mpath xlink:href="#plane-path"/>
+                            </animateMotion>
+                            <image id="plane" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xOC43NSAxMC4wOEwxNy44MyA3Ljc5TDE1LjU1IDkuNDNMMTUuNjcgMTEuMzNMMTguNzUgMTAuMDhNMjEgMTYuNjVMMTkuNzMgMTYuMTNMMTcuNzggMTcuMDZMMTcuODggMTkuMDhMMjEgMTYuNjVNMTQuODEgMTUuODhMMTMuMDQgMTYuNDVMMTEuODMgMTguMTNMMTEuMjQgMTcuOTZMMTEuNTggMTUuNTdMMTQuODEgMTUuODhNMTkuNDYgOC41Nkw0LjQ3IDMuNzZMMy41NyA1LjE2TDE5LjE4IDkuOEMxOS4xOCA5LjggMjEuMTEgMTAuNzQgMjEuMTEgMTJDMjEuMTEgMTMuMjYgMTkuMTggMTQuMiAxOS4xOCAxNC4yTDguNTUgMTcuMTdMNS43NiAxNy4zNUwzLjUgMTUuOTNMMi45NCAxNi4xNkwyLjQyIDE4LjQzTDMuOTIgMTkuMDVMNi44NyAxOC44NUwxOS44MSAxNS4yMUwyMiAxMS43NEwyMS4wMSA5LjU0TDE5LjQ2IDguNTZaIi8+PC9zdmc+" width="24" height="24" transform="rotate(90)"/>
+                        </g>
+                    </svg>
+                </div>
+                
+                <div id="studio-info" class="absolute top-4 right-4 bg-gray-800 bg-opacity-90 p-6 rounded-lg max-w-xs hidden">
+                    <button onclick="hideStudioInfo()" class="absolute top-2 right-2 text-gray-400 hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <h3 id="studio-name" class="text-xl font-bold mb-2"></h3>
+                    <p id="studio-description" class="text-gray-300 mb-4"></p>
+                    <div id="studio-games" class="flex flex-wrap gap-2"></div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="neon-btn px-6 py-3 rounded-md text-lg font-medium">
+                    EXPLORE MORE STUDIOS
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Zone -->
+    <section id="community" class="py-20 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 glitch" data-text="COMMUNITY ZONE" style="color: var(--neon-cyborg);">
+                    COMMUNITY ZONE
+                </h2>
+                <p class="text-gray-400 max-w-3xl mx-auto">
+                    Join our growing community of gamers and creators. Connect, share, and grow together.
+                </p>
+            </div>
+            
+            <div class="circuit-divider"></div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6" style="color: var(--electric-purple);">DISCORD ACTIVITY</h3>
+                    
+                    <div class="bg-gray-800 rounded-lg p-6 mb-8">
+                        <div class="flex items-center mb-4">
+                            <img src="https://cdn.discordapp.com/avatars/123456789012345678/abcdefghijklmnopqrstuvwxyz123456.png" alt="User Avatar" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <div class="font-medium">GameMaster64</div>
+                                <div class="text-xs text-gray-500">Today at 3:42 PM</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">Just finished my first playthrough of Elden Ring! What an incredible experience. Any recommendations for similar games?</p>
+                        <div class="flex space-x-4 text-sm">
+                            <button class="flex items-center text-gray-400 hover:text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                </svg>
+                                12
+                            </button>
+                            <button class="flex items-center text-gray-400 hover:text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                5
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://cdn.discordapp.com/avatars/987654321098765432/zyxwvutsrqponmlkjihgfedcba987654.png" alt="User Avatar" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <div class="font-medium">PixelPusher</div>
+                                <div class="text-xs text-gray-500">Today at 2:15 PM</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">Working on a new indie game inspired by 90s platformers. Here's a sneak peek at the character design!</p>
+                        <div class="mb-4">
+                            <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Game Art" class="w-full rounded">
+                        </div>
+                        <div class="flex space-x-4 text-sm">
+                            <button class="flex items-center text-gray-400 hover:text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                </svg>
+                                24
+                            </button>
+                            <button class="flex items-center text-gray-400 hover:text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                8
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-8">
+                        <button class="neon-btn px-6 py-3 rounded-md text-lg font-medium">
+                            JOIN OUR DISCORD
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-6" style="color: var(--razer-red);">GAMER PERSONALITY QUIZ</h3>
+                    
+                    <div class="bg-gray-800 rounded-lg p-6 mb-8">
+                        <div class="text-center mb-6">
+                            <h4 class="text-xl font-bold mb-2">What kind of gamer are you?</h4>
+                            <p class="text-gray-400">Take our quick quiz to discover your gaming personality and get a custom pixel avatar!</p>
+                        </div>
+                        
+                        <div id="quiz-container">
+                            <div id="quiz-question" class="mb-6">
+                                <h5 class="font-bold mb-4">1. What's your preferred play style?</h5>
+                                <div class="space-y-3">
+                                    <label class="flex items-center space-x-3 cursor-pointer">
+                                        <input type="radio" name="playstyle" class="form-radio text-neon-cyborg" checked>
+                                        <span>Competitive - I play to win and improve</span>
+                                    </label>
+                                    <label class="flex items-center space-x-3 cursor-pointer">
+                                        <input type="radio" name="playstyle" class="form-radio text-neon-cyborg">
+                                        <span>Casual - I play for fun and relaxation</span>
+                                    </label>
+                                    <label class="flex items-center space-x-3 cursor-pointer">
+                                        <input type="radio" name="playstyle" class="form-radio text-neon-cyborg">
+                                        <span>Explorer - I love discovering secrets and lore</span>
+                                    </label>
+                                    <label class="flex items-center space-x-3 cursor-pointer">
+                                        <input type="radio" name="playstyle" class="form-radio text-neon-cyborg">
+                                        <span>Creator - I enjoy building and designing</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <button class="text-gray-400 hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                <button class="neon-btn px-6 py-2 rounded-md">
+                                    Next Question
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-6" style="color: var(--electric-purple);">YOUR ACHIEVEMENTS</h3>
+                        
+                        <div class="grid grid-cols-3 gap-4 mb-8">
+                            <div class="achievement-badge bg-gray-800 p-4 rounded-lg flex flex-col items-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-neon-cyborg to-electric-purple rounded-full flex items-center justify-center mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                    </svg>
+                                </div>
+                                <span class="text-xs text-center">First Login</span>
+                            </div>
+                            
+                            <div class="achievement-badge bg-gray-800 p-4 rounded-lg flex flex-col items-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-razer-red to-electric-purple rounded-full flex items-center justify-center mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                    </svg>
+                                </div>
+                                <span class="text-xs text-center">5 News Read</span>
+                            </div>
+                            
+                            <div class="achievement-badge bg-gray-800 p-4 rounded-lg flex flex-col items-center opacity-50">
+                                <div class="w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-600 rounded-full flex items-center justify-center mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </div>
+                                <span class="text-xs text-center">First Comment</span>
+                            </div>
+                        </div>
+                        
+                        <button class="neon-btn px-6 py-3 rounded-md text-lg font-medium">
+                            VIEW ALL ACHIEVEMENTS
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4" style="color: var(--neon-cyborg);">AMIR'S HUB</h3>
+                    <p class="text-gray-400 text-sm">
+                        Where web design meets gaming culture. Join me on this digital adventure.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-sm font-semibold uppercase tracking-wider mb-4" style="color: var(--electric-purple);">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white text-sm">Home</a></li>
+                        <li><a href="#gaming" class="text-gray-400 hover:text-white text-sm">Gaming News</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white text-sm">Portfolio</a></li>
+                        <li><a href="#community" class="text-gray-400 hover:text-white text-sm">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-sm font-semibold uppercase tracking-wider mb-4" style="color: var(--razer-red);">Connect</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Discord</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Twitter</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Instagram</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">GitHub</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-sm font-semibold uppercase tracking-wider mb-4" style="color: var(--neon-cyborg);">Newsletter</h4>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Subscribe for gaming news and web design tips.
+                    </p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 bg-gray-800 text-white text-sm rounded-l focus:outline-none focus:ring-1 focus:ring-neon-cyborg w-full">
+                        <button class="bg-neon-cyborg text-gray-900 px-4 py-2 rounded-r text-sm font-medium hover:bg-opacity-90 transition">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">
+                    &copy; 2023 AmirMohammad's Gaming & Web Design Hub. All rights reserved.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-white">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.07-1.398-.064-1.628-.824-.75-1.668-1.033-1.668-1.033-1.088-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.608-.014 2.898-.014 3.293 0 .319.192.694.801.576 4.764-1.589 8.199-6.086 8.199-11.697 0-6.511-5.329-11.717-11.999-11.717z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-white">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-white">
+                        <span class="sr-only">Instagram</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Voting system
+        function vote(button) {
+            const voteCount = button.parentElement.querySelector('span');
+            let count = parseInt(voteCount.textContent);
+            
+            if (button.classList.contains('text-green-500')) {
+                // Upvote
+                voteCount.textContent = count + 1;
+                button.classList.add('text-green-400');
+                setTimeout(() => {
+                    button.classList.remove('text-green-400');
+                    button.classList.add('text-green-500');
+                }, 300);
+            } else {
+                // Downvote
+                voteCount.textContent = count - 1;
+                button.classList.add('text-red-400');
+                setTimeout(() => {
+                    button.classList.remove('text-red-400');
+                    button.classList.add('text-red-500');
+                }, 300);
+            }
+        }
+        
+        // Studio info popup
+        const studios = {
+            'cd-projekt-red': {
+                name: 'CD Projekt Red',
+                description: 'Polish video game developer, distributor and publisher based in Warsaw. Best known for The Witcher series and Cyberpunk 2077.',
+                games: ['The Witcher 3', 'Cyberpunk 2077', 'Gwent']
+            },
+            'fromsoftware': {
+                name: 'FromSoftware',
+                description: 'Japanese video game development company known for their Souls series, Bloodborne, Sekiro, and Elden Ring.',
+                games: ['Dark Souls', 'Bloodborne', 'Elden Ring']
+            },
+            'valve': {
+                name: 'Valve Corporation',
+                description: 'American video game developer, publisher, and digital distribution company. Creator of Steam, Half-Life, and Counter-Strike.',
+                games: ['Half-Life', 'Portal', 'Counter-Strike 2']
+            },
+            'ubisoft': {
+                name: 'Ubisoft',
+                description: 'French video game company with development studios across the world. Known for Assassin\'s Creed, Far Cry, and Rainbow Six.',
+                games: ['Assassin\'s Creed', 'Far Cry', 'Rainbow Six']
+            },
+            'rockstar': {
+                name: 'Rockstar Games',
+                description: 'American game developer known for pushing boundaries with titles like Grand Theft Auto and Red Dead Redemption.',
+                games: ['GTA V', 'Red Dead Redemption 2', 'Bully']
+            }
+        };
+        
+        function showStudioInfo(studioId) {
+            const studio = studios[studioId];
+            const infoBox = document.getElementById('studio-info');
+            const nameElement = document.getElementById('studio-name');
+            const descElement = document.getElementById('studio-description');
+            const gamesElement = document.getElementById('studio-games');
+            
+            nameElement.textContent = studio.name;
+            descElement.textContent = studio.description;
+            
+            gamesElement.innerHTML = '';
+            studio.games.forEach(game => {
+                const tag = document.createElement('span');
+                tag.className = 'text-xs px-2 py-1 bg-gray-700 rounded';
+                tag.textContent = game;
+                gamesElement.appendChild(tag);
+            });
+            
+            infoBox.classList.remove('hidden');
+        }
+        
+        function hideStudioInfo() {
+            document.getElementById('studio-info').classList.add('hidden');
+        }
+        
+        // Engagement level simulation
+        function updateEngagement() {
+            const engagement = Math.min(100, Math.floor(Math.random() * 30) + 70);
+            document.querySelector('.hp-bar').style.width = `${engagement}%`;
+        }
+        
+        // Initialize
+        updateEngagement();
+        setInterval(updateEngagement, 5000);
+        
+        // Easter egg - Konami code
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                
+                if (konamiIndex === konamiCode.length) {
+                    // Konami code completed
+                    document.body.classList.add('bg-gradient-to-br', 'from-purple-900', 'to-blue-900');
+                    document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
+                        el.classList.add('font-mono', 'tracking-tighter');
+                    });
+                    
+                    // Play 8-bit sound (would need actual audio file in real implementation)
+                    console.log('8-bit mode activated!');
+                    
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+    </script>
+</body>
+</html>
